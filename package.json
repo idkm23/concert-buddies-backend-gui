@@ -1,7 +1,7 @@
 {
-  "name": "concert-buddies-backend",
+  "name": "concert-buddies-backend-gui",
   "version": "1.0.0",
-  "description": "concert buddies backend",
+  "description": "concert buddies backend gui",
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",
@@ -10,19 +10,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idkm23/concert-buddies-backend.git"
+    "url": "git+https://github.com/idkm23/concert-buddies-backend-gui.git"
   },
   "keywords": [
     "concert",
     "buddies",
-    "backend"
+    "backend",
+    "gui"
   ],
   "author": "Christopher Munroe",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/idkm23/concert-buddies-backend/issues"
+    "url": "https://github.com/idkm23/concert-buddies-backend-gui/issues"
   },
-  "homepage": "https://github.com/idkm23/concert-buddies-backend#readme",
+  "homepage": "https://github.com/idkm23/concert-buddies-backend-gui#readme",
   "engines": {
     "node": "8.9.4"
   },
