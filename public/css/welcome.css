@@ -1,0 +1,71 @@
+
+html, body {
+    height: 95%;
+}
+
+div.page-content{
+    clear: both;
+    display: flex;
+    max-width: 80%;
+    height: 80%;
+    align-items: center;
+    margin: auto;
+    flex-direction: row;
+}
+
+div.blurb {
+    flex: 30%;
+    display: inline-block;
+    padding-right: 20%;
+}
+
+div.sign-up-form {
+    flex: 50%;
+}
+
+input {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+select {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.log-in-form {
+    /*float: right;*/
+    margin-left: auto;
+    order: 2; /* Combined with auto left margin, this gives the effect of float:right */
+    display: flex;
+    margin: auto;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.log-in-form div {
+    flex: 33%;
+}
+
+.email-box label, .email-box input {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 20px;
+}
+
+.password-box label, .password-box input {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 20px;
+}
+
+.submit-box label, .submit-box input {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 20px;
+}

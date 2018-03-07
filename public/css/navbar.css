@@ -1,0 +1,38 @@
+div.nav-bar {
+    display: flex;
+    align-items: center;
+    background: SkyBlue;
+    height: 10vh;
+    flex-direction: row;
+}
+
+.concert-buddies {
+    font-size: 5vh;
+    margin-left: 20px;
+}
+
+.nav-buttons {
+    /*float: right;*/
+    margin-left: auto;
+    order: 2;
+    /* Combined with auto left margin, this gives the effect of float:right */
+    display: flex;
+    margin: auto;
+    align-items: center;
+    margin-right: 0px;
+    height: 100%;
+}
+
+.chat-box,
+.profile-box,
+.logout-box {
+    height: 100%;
+}
+
+.chat-box button,
+.profile-box button,
+.logout-box button {
+    height: 100%;
+    font-size: 2.5vh;
+    width: 20vh;
+}
