@@ -1,26 +1,24 @@
 div.nav-bar {
     display: flex;
     align-items: center;
-    background: SkyBlue;
-    height: 10vh;
+    background: #9EC4F8;
+    min-height: 80px;
     flex-direction: row;
 }
 
 .concert-buddies {
-    font-size: 5vh;
-    margin-left: 20px;
+    display: flex;
+    font-size: 36px;
+    margin: 0 20px;
 }
 
 .nav-buttons {
-    /*float: right;*/
+    display: flex;
+    align-self: stretch;
     margin-left: auto;
     order: 2;
     /* Combined with auto left margin, this gives the effect of float:right */
-    display: flex;
-    margin: auto;
     align-items: center;
-    margin-right: 0px;
-    height: 100%;
 }
 
 .chat-box,

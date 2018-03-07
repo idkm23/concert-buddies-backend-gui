@@ -1,15 +1,10 @@
-
-html, body {
-    height: 95%;
-}
-
 div.page-content{
     clear: both;
     display: flex;
-    max-width: 80%;
-    height: 80%;
+    width: 80%;
+    max-width: 900px;
     align-items: center;
-    margin: auto;
+    margin: 50px auto;
     flex-direction: row;
 }
 
@@ -27,6 +22,10 @@ input {
     margin-top: 10px;
     margin-bottom: 20px;
     margin-right: 20px;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
 }
 
 select {
