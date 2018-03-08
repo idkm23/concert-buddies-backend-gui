@@ -1,0 +1,120 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  display: flex;
+  flex-grow: 1;
+}
+
+/* Concert info stuff */
+
+#concert-info-panel {
+  display: flex;
+  width: 300px;
+  padding: 25px;
+  border-right: 1px solid black;
+  flex-direction: column;
+}
+
+#concert-info-subpanel {
+  position: relative;
+  margin-bottom: auto;
+}
+
+#songkick-link {
+  margin-top: 100px;
+}
+
+.songkick-img {
+  width: 200px;
+  height: auto;
+}
+
+h4 {
+  margin: 0;
+  font-weight: normal;
+}
+
+#artist-name {
+  margin: 15px 0;
+}
+
+/* Matching panel stuff */
+
+#matching-panel {
+  flex-grow: 1;
+  text-align: center;
+  border-left: none;
+  padding: 25px;
+}
+
+#matching-subpanel {
+  display: inline-block;
+}
+
+#active-profile-img-wrap, #active-profile-info {
+  cursor: pointer;
+}
+
+#active-profile-img {
+  display: inline-block;
+  height: 450px;
+  width: auto;
+}
+
+#active-profile-img-wrap {
+  text-align: center;
+  height: 450px;
+  width: 450px;
+  overflow: hidden;
+  border: 1px solid black;
+  border-radius: 3px 3px 0 0;
+  background-color: #222;
+}
+
+#active-profile-info {
+  text-align: left;
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 0 0 3px 3px;
+  border-top: none;
+}
+
+.vote-btn {
+  display: inline-block;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  border-right: none;
+  padding: 8px;
+  float: center;
+  cursor: pointer;
+
+  -o-transition:.2s;
+  -ms-transition:.2s;
+  -moz-transition:.2s;
+  -webkit-transition:.2s;
+  transition:.2s;
+}
+
+#vote-up {
+  color: green;
+  border-bottom-left-radius: 3px; 
+}
+
+#vote-up:hover {
+  background-color: #ded;
+}
+
+#vote-down {
+  color: red;
+  border-right: 1px solid black;
+  border-bottom-right-radius: 3px; 
+  margin-left: -4px;
+}
+
+#vote-down:hover {
+  background-color: #fdd;
+}

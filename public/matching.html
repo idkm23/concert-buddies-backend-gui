@@ -9,51 +9,46 @@
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/welcome.css"> 
-    
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $('#menu').load('navbar.html');
-    });
+    <link rel="stylesheet" href="css/matching.css"> 
 </script>
 
 </head>
 
 <body>
-    
-<!--        <h1 class="concert-buddies">ConcertBuddies</h1>
-        <div class="nav-buttons">
-            <div class="chat-box">
-                <button class="button" title="Chat with matches"><i class="fa fa-commenting-o"></i> Chat</button>
-            </div>
-            <div class="profile-box">
-                <button class="button" title="Edit your profile"><i class="fa fa-user-circle-o"></i> Profile</button>
-            </div>
-            <div class="logout-box">
-                <button class="button" title="Log out"><i class="fa fa-close"></i> Logout</button>
-            </div>
-        </div>-->
-        <div id="menu"></div>
-    
-<!--    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            $.ajax({
-                url: "http://localhost:8080/navbar.html",
-                dataType: "html",
-                success: function(data) {
-                    $("#nav-bar").html(data);
-                }
-            });
-        });
-    </script>-->
-    
     <div class="page-content">
-        <div class="my-events">
-            <h2>My Events</h2>
-            <div class="joined-event"> </div>
+        <div id="concert-info-panel">
+            <div id="concert-info-subpanel">
+                <h4 id="concert-date">Wednesday 01 August 2018</h4>
+                <h4 id="concert-time">7:00 PM</h4>
+                <h1 id="artist-name">Artist Name</h1>
+                <h4 id="venue-title">at Venue Name</h4>
+                <h4 id="venue-location">Boston, MA</h4>
+            </div>
+            <a id="songkick-link"
+               href="https://www.songkick.com/concerts/24908779-grimes-at-paradise-rock-club">
+                <img class="songkick-img" src="../images/powered-by-songkick-pink.png" />
+            </a>
         </div>
-        <div class="event-search"> </div>
-        <!-- class="event-search" -->
+        <div id="matching-panel">
+            <div id="matching-subpanel">
+                <div id="active-profile-img-wrap">
+                    <img id="active-profile-img"
+                         src="https://scontent.fbed1-1.fna.fbcdn.net/v/t1.0-9/26220206_1795487000462973_6674370173638008139_n.jpg?oh=9ae52c85eaa06a1ba48fa669b873c46d&oe=5B4190CD"/>
+                </div>
+                <div id="active-profile-info">
+                    <strong id="active-profile-name">Chris</strong>,
+                     <span id="active-profile-age">21</span>
+                </div>
+                <div id="voting-controls">
+                    <div id="vote-up" class="vote-btn">
+                        <i class="fa fa-thumbs-o-up fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div id="vote-down" class="vote-btn">
+                        <i class="fa fa-thumbs-o-down fa-3x" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- class="page-content" -->
 </body>

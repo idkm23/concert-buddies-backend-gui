@@ -4,6 +4,7 @@ div.nav-bar {
     background: #9EC4F8;
     min-height: 80px;
     flex-direction: row;
+    border-bottom: 2px solid #5880B5;
 }
 
 .concert-buddies {
