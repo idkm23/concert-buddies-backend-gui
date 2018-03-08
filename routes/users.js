@@ -8,7 +8,7 @@ var router = express.Router();
  **/
 router.route('/:user_id')
   .get(function(req, res) {
-    modules.User.findById(req.params.user_id, {}).then(user => {
+    User.findById(req.params.user_id, {}).then(user => {
       res.json(user);
     });
   });
