@@ -22,8 +22,7 @@ module.exports = function(app, passport) {
       }
 
       var time = convertTime(
-        tm_res.dates.start.localTime.slice(0, -3),
-        'HH:MM A'
+        tm_res.dates.start.localTime.slice(0, -3)
       );
       var venue = tm_res._embedded.venues[0];
       var location = venue.city.name + ", "
