@@ -21,9 +21,12 @@ module.exports = function(app, passport) {
         return;
       }
 
-      var time = convertTime(
-        tm_res.dates.start.localTime.slice(0, -3)
-      );
+      var time = '';
+      if (tm_res.dates.start.localTime != null) {
+        time = convertTime(
+          tm_res.dates.start.localTime.slice(0, -3)
+        );
+      }
       var venue = tm_res._embedded.venues[0];
       var location = venue.city.name + ", "
         + (venue.state != null ? venue.state.name : venue.country.name);
