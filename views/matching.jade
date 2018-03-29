@@ -1,3 +1,34 @@
 doctype html
 include ../public/navbar.html
-include ../public/matching.html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title ConcertBuddies
+    // jQuery
+    script(src='http://code.jquery.com/jquery-2.1.1.min.js')
+    link(rel='stylesheet', href='css/main.css')
+    link(rel='stylesheet', href='css/matching.css')
+  body
+    .page-content
+      #concert-info-panel
+        #concert-info-subpanel
+          h4#concert-date #{date}
+          h4#concert-time #{time}
+          h1#artist-name #{concert_title}
+          h4#venue-title at #{venue}
+          h4#venue-location #{location}
+        a#tm-link(href="#{tm_url}")
+          img.tm-img(src='../images/tm-logo.jpg')
+      #matching-panel
+        #matching-subpanel
+          #active-profile-img-wrap
+            img#active-profile-img(src='https://scontent.fbed1-1.fna.fbcdn.net/v/t1.0-9/26220206_1795487000462973_6674370173638008139_n.jpg?oh=9ae52c85eaa06a1ba48fa669b873c46d&oe=5B4190CD')
+          #active-profile-info
+            strong#active-profile-name Chris
+            | ,
+            span#active-profile-age 21
+          #voting-controls
+            #vote-up.vote-btn
+              i.fa.fa-thumbs-o-up.fa-3x(aria-hidden='true')
+            #vote-down.vote-btn
+              i.fa.fa-thumbs-o-down.fa-3x(aria-hidden='true')
