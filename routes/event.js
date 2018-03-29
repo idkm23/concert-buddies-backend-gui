@@ -5,7 +5,6 @@ var UAE = models.User_Attending_Event;
 module.exports = function(app, passport) {
 
   app.get('/event', utils.isLoggedIn, function(req, res) {
-    console.log(req);
     res.render('event', {});
   });
 
@@ -15,7 +14,7 @@ module.exports = function(app, passport) {
   app.get('/api/event/get_joined', function(req, res) {
     UAE.findAll({
       attributes: ['event_id'],
-      where: { user_id: req.params.user_id }
+      where: { user_id: req.query.user_id }
     }).then(events => {
       var extracted_events = [];
       events.forEach(function(event) {
@@ -41,7 +40,7 @@ module.exports = function(app, passport) {
       if (user_attending_events.length != 0) {
         res.json({
           message: 'Error: user \''
-            + req.body.user_id + '\' is already in event \''
+            + req.user.id + '\' is already in event \''
             + req.body.event_id + '\'',
           req: req.body
         });
@@ -87,8 +86,8 @@ module.exports = function(app, passport) {
     // find user-event pair
     UAE.findAll({
       where: {
-        event_id: req.user.id,
-        user_id: req.body.user_id
+        event_id: req.body.event_id,
+        user_id: req.user.id
       }
     }).then(user_attending_events => {
       if (user_attending_events.length == 0) {

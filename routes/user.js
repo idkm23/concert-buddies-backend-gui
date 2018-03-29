@@ -8,8 +8,9 @@ module.exports = function(app, passport) {
    * REQUIRES AUTHENTICATION
    * example url: /api/user/fetch?user_id=12341
    **/
-  app.get('/api/user', utils.isLoggedIn, function(req, res) {
-    User.findById(req.params.user_id, {}).then(user => {
+  app.get('/api/user', function(req, res) {
+    User.findById(req.query.user_id, {}).then(user => {
+      delete user.dataValues.password;
       res.json(user);
     });
   });
