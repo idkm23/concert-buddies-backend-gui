@@ -22,6 +22,10 @@ div.nav-bar {
     align-items: center;
 }
 
+.nav-buttons a {
+  display: inline-block;
+}
+
 .chat-box,
 .profile-box,
 .logout-box {
@@ -30,7 +34,7 @@ div.nav-bar {
 
 .chat-box button,
 .profile-box button,
-.logout-box button {
+.logout-box button{
     height: 100%;
     margin-right: 15px;
     font-size: 20px;

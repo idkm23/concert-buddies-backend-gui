@@ -3,12 +3,11 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var env = require('dotenv').load()
 var bodyParser = require('body-parser');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-var events = require('./routes/events');
-var matching = require('./routes/matching');
+var passport = require('passport');
+var session = require('express-session');
+var models = require('./models');
 
 var app = express();
 
@@ -20,14 +19,20 @@ app.set('view engine', 'jade');
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/events', events);
-app.use('/matching', matching);
+//load passport strategies
+require('./config/passport/passport.js')(passport, models.User);
+app.use(session({ secret: 'SharingIsCaring1', resave: true, saveUninitialized:true})); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+var index = require('./routes/index')(app, passport);
+var user = require('./routes/user')(app, passport);
+var event = require('./routes/event')(app, passport);
+var matching = require('./routes/matching')(app, passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

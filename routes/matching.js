@@ -1,9 +1,7 @@
-var modules = require('../models');
-var express = require('express');
-var router = express.Router();
+var models = require('../models');
 
-router.get('/', function(req, res) {
-  res.render('matching', {});
-});
-
-module.exports = router;
+module.exports = function(app, passport) {
+  app.get('/matching', function(req, res) {
+    res.render('matching', {});
+  });
+};

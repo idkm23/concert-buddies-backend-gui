@@ -5,7 +5,14 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    name: DataTypes.TEXT,
+    first_name: DataTypes.TEXT,
+    last_name: DataTypes.TEXT,
+    email: DataTypes.TEXT,
+    password: DataTypes.TEXT,
+//    status: {
+//      type: sequelize.ENUM('active', 'inactive'),
+//      defaultValue: 'active'
+//    },
     dob: DataTypes.DATE,
     gender: DataTypes.BOOLEAN, // false = male, true = female
     pictures: DataTypes.ARRAY(DataTypes.BLOB)
