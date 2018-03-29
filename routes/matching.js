@@ -7,6 +7,10 @@ var models = require('../models');
 
 module.exports = function(app, passport) {
   app.get('/matching', utils.isLoggedIn, function(req, res) {
+    if (req.query.event_id == null) {
+      res.json("Error: please specifiy an event_id");
+    }
+
     var options = {
       host: tm.host,
       path: tm.event_info_api + req.query.event_id + tm.api_key
