@@ -9,6 +9,7 @@ module.exports = function(app, passport) {
   app.get('/matching', utils.isLoggedIn, function(req, res) {
     if (req.query.event_id == null) {
       res.json("Error: please specifiy an event_id");
+      return;
     }
 
     var options = {
