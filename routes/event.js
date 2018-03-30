@@ -12,9 +12,13 @@ module.exports = function(app, passport) {
    * example url: /api/event/get_joined?user_id=12341
    **/
   app.get('/api/event/get_joined', function(req, res) {
+    var id = req.query.user_id;
+    if (id == null) {
+      id = req.user.id;
+    }
     UAE.findAll({
       attributes: ['event_id'],
-      where: { user_id: req.query.user_id }
+      where: { user_id: id}
     }).then(events => {
       var extracted_events = [];
       events.forEach(function(event) {
