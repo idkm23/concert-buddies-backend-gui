@@ -6,8 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
         columns:[
             {title:"Event", field:"name", sorter:"string"},
             {title:"Location", field:"dates.timezone", sorter:"string"},
-            {title:"Date", field:"dates.start.localDate", sorter:"date", sorterParams:{format:"YYYY-MM-DD"}}
-        ]
+            {title:"Date", field:"dates.start.localDate", sorter:"date", sorterParams:{format:"YYYY-MM-DD"}},
+            {title:"Id", field:"id", visible:false}
+        ],
+        rowClick:function(e, row){
+            var url = "/matching?event_id=";
+            url = url + row.getData().id;
+            console.log(url);
+            
+            window.location.assign(url);
+        }
     });
 });
 
