@@ -19,7 +19,7 @@ body {
     cursor: pointer;
 }
 
-.button:hover {
+.button:active {
     border: 2px inset DodgerBlue;
 }
 

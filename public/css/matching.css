@@ -44,14 +44,17 @@ h4 {
 /* Matching panel stuff */
 
 #matching-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-grow: 1;
   text-align: center;
   border-left: none;
   padding: 25px;
 }
 
-#matching-subpanel {
-  display: inline-block;
+.matching-subpanel {
+  display: none;
 }
 
 #active-profile-img-wrap, #active-profile-info {
@@ -117,4 +120,65 @@ h4 {
 
 #vote-down:hover {
   background-color: #fdd;
+}
+
+.btn {
+  font-weight: bold;
+  font-size: 14px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+#leave_event_btn {
+  display: none;
+  margin-top: 25px;
+  background-color: #c33636;
+  border: 3px outset #c33636;
+  color: white;
+}
+
+#leave_event_btn:hover {
+  background-color: #c93c3c;
+  border: 3px outset #c93c3c;;
+}
+
+#leave_event_btn:active {
+  border: 3px inset #c93c3c;
+}
+
+#join_event_thumbnail {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+}
+
+#join_event_thumbnail img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 198px;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  border: 1px solid #ccc;
+}
+
+#join_event_btn {
+  background-color: DodgerBlue;
+  border: 3px outset DodgerBlue;
+  color: white;
+  font-size: 20px;
+  width: 100%;
+  margin-top: 25px;
+}
+
+#join_event_btn:hover {
+  background-color: #2495ff;
+  border: 3px outset #2495ff;
+}
+
+#join_event_btn:active {
+  border: 3px inset #2495ff;
 }

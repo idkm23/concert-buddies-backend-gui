@@ -4,6 +4,7 @@ var convertTime = require('convert-time');
 var utils = require('./utils');
 var tm = utils.tm;
 var models = require('../models');
+var UAE = models.User_Attending_Event;
 
 module.exports = function(app, passport) {
   app.get('/matching', utils.isLoggedIn, function(req, res) {
@@ -21,24 +22,38 @@ module.exports = function(app, passport) {
         res.json("Error: ticketmaster timed out");
         return;
       }
-
       var time = '';
       if (tm_res.dates.start.localTime != null) {
         time = convertTime(
           tm_res.dates.start.localTime.slice(0, -3)
         );
       }
+      var pic = '';
+      if (tm_res.images != null && tm_res.images.length > 2) {
+        pic = tm_res.images[1].url;
+      }
       var venue = tm_res._embedded.venues[0];
       var location = venue.city.name + ", "
         + (venue.state != null ? venue.state.name : venue.country.name);
 
-      res.render('matching', {
-        concert_title: tm_res.name,
-        venue: venue.name,
-        location: location,
-        date: tm_res.dates.start.localDate,
-        time: time,
-        tm_url: tm_res.url
+
+      UAE.findOne({
+        where: {
+          user_id: req.user.id,
+          event_id: req.query.event_id
+        }
+      }).then(user => {
+        var has_joined = (user != null);
+        res.render('matching', {
+          concert_title: tm_res.name,
+          venue: venue.name,
+          location: location,
+          date: tm_res.dates.start.localDate,
+          time: time,
+          tm_url: tm_res.url,
+          tm_pic: pic,
+          has_joined: has_joined
+        });
       });
     });
   });

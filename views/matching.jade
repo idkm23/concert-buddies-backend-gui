@@ -6,6 +6,9 @@ html(lang='en')
     title ConcertBuddies
     // jQuery
     script(src='http://code.jquery.com/jquery-2.1.1.min.js')
+    script.
+      has_joined="#{has_joined}";
+    script(src='javascript/matching.js')
     link(rel='stylesheet', href='css/main.css')
     link(rel='stylesheet', href='css/matching.css')
   body
@@ -17,10 +20,15 @@ html(lang='en')
           h1#artist-name #{concert_title}
           h4#venue-title at #{venue}
           h4#venue-location #{location}
+          button#leave_event_btn.btn Leave Event
         a#tm-link(href="#{tm_url}")
           img.tm-img(src='../images/tm-logo.jpg')
       #matching-panel
-        #matching-subpanel
+        .matching-subpanel#matching-subpanel-1
+          #join_event_thumbnail
+            img(src='#{tm_pic}')
+          button.btn#join_event_btn Join Event
+        .matching-subpanel#matching-subpanel-2
           #active-profile-img-wrap
             img#active-profile-img(src='https://scontent.fbed1-1.fna.fbcdn.net/v/t1.0-9/26220206_1795487000462973_6674370173638008139_n.jpg?oh=9ae52c85eaa06a1ba48fa669b873c46d&oe=5B4190CD')
           #active-profile-info
