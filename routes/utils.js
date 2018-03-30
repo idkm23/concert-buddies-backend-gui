@@ -20,7 +20,7 @@ module.exports = {
    * @param options: http options object
    * @param callback: callback to pass the results JSON object(s) back
    */
-  getJSON: function(options, onResult) {
+  getJSON: function getJSON(options, onResult, attempts=0) {
     var port = options.port == 443 ? https : http;
     var req = port.request(options, function(res)
       {
@@ -40,6 +40,9 @@ module.exports = {
 
     req.on('error', function(err) {
       console.log('error: ' + err.message);
+      if (attempts == 0) {
+        getJSON(options, onResult, 1);
+      }
       //res.send('error: ' + err.message);
     });
 

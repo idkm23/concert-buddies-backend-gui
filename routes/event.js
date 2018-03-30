@@ -4,8 +4,8 @@ var UAE = models.User_Attending_Event;
 
 module.exports = function(app, passport) {
 
-  app.get('/event', utils.isLoggedIn, function(req, res) {
-    res.render('event', {});
+  app.get('/events', utils.isLoggedIn, function(req, res) {
+    res.render('events', {});
   });
 
   /* FETCH JOINED EVENTS FOR USER via GET

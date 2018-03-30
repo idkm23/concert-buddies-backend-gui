@@ -19,7 +19,7 @@ module.exports = function(app, passport) {
    * example url: /api/user/signup
    **/
   app.post('/api/user/signin', passport.authenticate('local-signin',  {
-    successRedirect: '/event',
+    successRedirect: '/events',
     failureRedirect: '/'
   }));
 
@@ -27,7 +27,7 @@ module.exports = function(app, passport) {
    * example url: /api/user/signup
    **/
   app.post('/api/user/signup', passport.authenticate('local-signup', {
-    successRedirect: '/event',
+    successRedirect: '/events',
     failureRedirect: '/'
   }));
 

@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
       path: tm.event_info_api + req.query.event_id + tm.api_key
     };
     utils.getJSON(options, function(status, tm_res) {
-      if (tm_res == null) {
+      if (tm_res.dates == null) {
         res.json("Error: ticketmaster timed out");
         return;
       }
