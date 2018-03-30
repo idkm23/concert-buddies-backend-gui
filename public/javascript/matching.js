@@ -22,7 +22,7 @@ $(document).ready(function() {
 function set_joined_layout(has_joined) {
   if (has_joined) {
     $("#matching-subpanel-1").hide();
-    $("#matching-subpanel-2").show();
+    $("#matching-subpanel-2").show()
     $("#leave_event_btn").show();
   } else {
     $("#matching-subpanel-2").hide();
