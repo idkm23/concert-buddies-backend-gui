@@ -22,6 +22,24 @@ div.my-events {
     margin-right: 10px;
 }
 
+.joined-event {
+    border: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    background: #99e6ff;
+}
+
+.joined-event:hover {
+    background: #66d9ff;
+}
+
+.no-events {
+    margin-right: 20px;
+}
+
 div.event-search {
     flex: 70%;
     padding-left: 10px;
