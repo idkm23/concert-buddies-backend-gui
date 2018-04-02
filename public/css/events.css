@@ -6,6 +6,7 @@ div.page-content{
     clear: both;
     display: flex;
     width: 80%;
+    min-width: 923px;
     height: 100%;
     margin: 50px auto;
     flex-direction: row;

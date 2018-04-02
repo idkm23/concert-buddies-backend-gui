@@ -1,0 +1,182 @@
+* {
+  box-sizing: border-box;  
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  min-width: 780px;
+  height: 100%;
+  width: 100%;
+}
+
+.page-content {
+  display: flex;
+  flex-grow: 1;
+}
+
+#contact-panel {
+  width: 300px;
+  min-width: 300px;
+  overflow-y: scroll;
+}
+
+.contact {
+  display: flex;
+  border-bottom: 1px solid #d8d8d8;
+  padding: 10px;
+}
+
+.contact .pic {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.contact .text_info {
+  display: inline-block;
+  margin-left: 10px;
+  flex-grow: 1;
+}
+
+.contact .name {
+  margin-bottom: 5px;
+}
+
+.contact .last_msg {
+  color: rgba(153, 153, 153, 1);
+}
+
+#chat-panel {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+#chat-log {
+  flex-grow: 1;
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+.message_row {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.message_row .spacer {
+  flex-grow: 1;
+}
+
+.message {
+  min-width: 1%;
+  word-wrap: break-word;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.spacer {
+  width: 30%;
+}
+
+.message_row.to .message {
+  color: white;
+  background-color: #0084ff;
+}
+
+.message_row.from .message {
+  background-color: #dedede;
+}
+
+#chat-input-bar {
+  display: flex;
+  height: 120px;
+  border-top: 1px solid black;
+}
+
+#chat-input {
+  padding: 8px;
+  flex-grow: 1;
+  font-size: 20px;
+  resize: none;
+}
+
+#chat-send-btn {
+  display: flex;
+  justify-content: center;
+  width: 75px;
+  border-left: 1px solid black;
+  cursor: pointer;
+}
+
+#chat-send-btn::before {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+#info-panel {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  min-width: 300px;
+  padding: 15px;
+}
+
+.active_pic{
+  margin-bottom: 15px ;
+  width: 270px;
+  height: 270px;
+  border-radius: 2%;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.active_name {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.active_age {
+  display: inline-block;
+}
+
+.active_event {
+  color: #00E;
+  text-decoration: underline;
+  margin-bottom: auto;
+}
+
+.active_event:visited {
+  color: #0084ff;
+  text-decoration: underline;
+}
+
+.remove_friend {
+  height: 31px;
+  margin: 15px auto;
+  padding: 5px;
+  background-color: #c33636;
+  border: 3px outset #c33636;
+  color: white;
+}
+
+.remove_friend:hover {
+  background-color: #c93c3c;
+  border: 3px outset #c93c3c;;
+}
+
+.remove_friend:active {
+  border: 3px inset #c93c3c;
+}

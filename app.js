@@ -33,6 +33,7 @@ var index = require('./routes/index')(app, passport);
 var user = require('./routes/user')(app, passport);
 var event = require('./routes/event')(app, passport);
 var matching = require('./routes/matching')(app, passport);
+var chat = require('./routes/chat')(app, passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
