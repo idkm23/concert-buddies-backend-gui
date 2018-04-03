@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ConcertBuddies</title>
+    
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+    <!-- font awesome icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Slick library -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"/>
+    
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/profile.css">
+    
+    
+</head>
+
+<body>
+    <div class="page-content">
+        <div class="profile-pics">
+            <h2>Profile Photos</h2>
+            <button class="button" id="upload-button">Add New</button>
+            <br>
+            <hr>
+            <div class="img-carousel">
+                <div><h3>1</h3></div>
+                <div><h3>2</h3></div>
+                <div><h3>3</h3></div>
+                <div><h3>4</h3></div>
+            </div>
+        </div>
+        <div class="profile-desc"> 
+            <h2>Personal Description</h2>
+            <button class="button" id="update-button">Update Description</button>
+            <br>
+            <hr>
+            <textarea id="description" placeholder="Describe here what you think other users should know about you!"></textarea>
+        </div>
+        <!-- class="profile-desc" -->
+    </div>
+    <!-- class="page-content" -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.1/jquery-migrate.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+          $('.img-carousel').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4
+    });
+    });
+  </script>
+</body>
+
+</html>
