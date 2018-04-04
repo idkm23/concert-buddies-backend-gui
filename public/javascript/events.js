@@ -1,16 +1,26 @@
 document.addEventListener('DOMContentLoaded', function () {
     
+    var loaderHTML = $("#loading-icon").prop("outerHTML");
+    
     // Construct search results table
     $("#results-table").tabulator({
         layout:"fitColumns",
         height:"75%",
-        placeholder:"Enter your search above",
+        placeholder:"No Search Results",
         columns:[
             {title:"Event", field:"name", sorter:"string"},
             {title:"Location", field:"location", sorter:"string"},
             {title:"Date", field:"date", sorter:"date", sorterParams:{format:"YYYY-MM-DD"}},
             {title:"Id", field:"id", visible:false}
         ],
+        ajaxLoaderLoading:loaderHTML,
+        ajaxResponse:function(url, params, response){
+        //url - the URL of the request
+        //params - the parameters passed with the request
+        //response - the JSON object returned in the body of the response.
+
+            return extractFields(response);
+        },
         rowClick:function(e, row){
             var url = "/matching?event_id=";
             url = url + row.getData().id;
@@ -25,6 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(data);
         setMyEvents(data);
     });
+    
+    getSearchResults();
 });
 
 
@@ -39,43 +51,31 @@ function getSearchResults() {
         searchTerms + 
         "&size=30&apikey=etiKzCoqnYu3LmsKbArqF6uxdAJGaENS";
     
-    $.ajax({
-        type:"GET",
-        url:searchUrl,
-        async:true,
-        dataType: "json",
-        success: function(json) {
-            console.log(json);
-            console.log("Res count: " + json.page.totalElements);
-            
-            if(json.page.totalElements > 0) {
-                $("#results-table").tabulator("setData", extractFields(json._embedded.events));
-            }
-        },
-        error: function(xhr, status, err) {
-            console.log(err);
-        }
-    });
+    $("#results-table").tabulator("setData", searchUrl);
 }
 
 /* Gets the relevant fields from API response to bind to table */
-function extractFields(eventArray) {
+function extractFields(jsonResponse) {
     var tableData = {events:[]};
-    for(var i = 0; i < eventArray.length; i++) {
-        var rowData = {};
-        rowData['name'] = eventArray[i].name;
-        
-        var locationString = eventArray[i]._embedded.venues[0].city.name + ", ";
-        if(eventArray[i]._embedded.venues[0].state != null){
-            locationString += eventArray[i]._embedded.venues[0].state.stateCode;
-        } else {
-            locationString += eventArray[i]._embedded.venues[0].country.name;
+    
+    if(jsonResponse.page.totalElements > 0) {
+        eventArray = jsonResponse._embedded.events;
+        for(var i = 0; i < eventArray.length; i++) {
+            var rowData = {};
+            rowData['name'] = eventArray[i].name;
+
+            var locationString = eventArray[i]._embedded.venues[0].city.name + ", ";
+            if(eventArray[i]._embedded.venues[0].state != null){
+                locationString += eventArray[i]._embedded.venues[0].state.stateCode;
+            } else {
+                locationString += eventArray[i]._embedded.venues[0].country.name;
+            }
+            rowData['location'] = locationString;
+
+            rowData['date'] = eventArray[i].dates.start.localDate;
+            rowData['id'] = eventArray[i].id;
+            tableData.events.push(rowData);
         }
-        rowData['location'] = locationString;
-        
-        rowData['date'] = eventArray[i].dates.start.localDate;
-        rowData['id'] = eventArray[i].id;
-        tableData.events.push(rowData);
     }
     
     return tableData.events;
