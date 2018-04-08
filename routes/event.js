@@ -1,6 +1,7 @@
 var models = require('../models');
 var utils = require('./utils');
 var UAE = models.User_Attending_Event;
+var Next_User = models.Next_User;
 
 module.exports = function(app, passport) {
 
@@ -43,24 +44,34 @@ module.exports = function(app, passport) {
     }).then(user_attending_events => {
       if (user_attending_events.length != 0) {
         res.json({
+          status: 1,
           message: 'Error: user \''
             + req.user.id + '\' is already in event \''
             + req.body.event_id + '\'',
           req: req.body
         });
 
-      // find the next seq_id and add it to the table
+        // find the next seq_id and add it to the table
       } else {
-        UAE.findOne({
-          attributes: ['seq_id'],
-          order: [ ['seq_id', 'DESC'] ],
-          where: { event_id: req.body.event_id },
+        Next_User.findOrCreate({
+          where: {
+            user_id: req.user.id,
+            event_id: req.body.event_id,
+          },
+          defaults: {
+            next_seq_id: 0
+          }
+        }).then(next_user => {
+          return UAE.findOne({
+            attributes: ['seq_id'],
+            order: [ ['seq_id', 'DESC'] ],
+            where: { event_id: req.body.event_id },
+          });
         }).then(user_attending_event => {
           if (user_attending_event != null) {
-            next_seq_id = +user_attending_event[0]["seq_id"];
+            next_seq_id = +user_attending_event.seq_id;
             next_seq_id += 1;
           }
-
           createUAE(res, req, next_seq_id);
         });
       }
@@ -75,10 +86,16 @@ module.exports = function(app, passport) {
       seq_id: seq_id,
     }).then(user_attending_event => {
       res.json({
+        status: 0,
         message: 'Sucess: user \'' + req.user.id
           + '\' joined event \'' + req.body.event_id + '\'',
         req: req.body,
         user_attending_event: user_attending_event });
+    }).catch(err => {
+      res.json({
+        message: err.message,
+        req: req.params
+      });
     });
   }
 
@@ -96,18 +113,20 @@ module.exports = function(app, passport) {
     }).then(user_attending_events => {
       if (user_attending_events.length == 0) {
         res.json({
+          status: 1,
           message: 'Error: user \''
             + req.user.id+ '\' is not in event \''
             + req.body.event_id + '\'',
           req: req.body
         });
 
-      // remove it
+        // remove it
       } else {
         user_attending_events.forEach(function(uae) {
           uae.destroy();
         });
         res.json({
+          status: 0,
           message: 'Success: user \''
             + req.user.id+ '\' has left event \''
             + req.body.event_id + '\'',

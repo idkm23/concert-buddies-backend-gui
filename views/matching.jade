@@ -28,15 +28,17 @@ html(lang='en')
           #join_event_thumbnail
             img(src='#{tm_pic}')
           button.btn#join_event_btn Join Event
-        .matching-subpanel#matching-subpanel-2
-          #active-profile-img-wrap
-            img#active-profile-img(src='https://scontent.fbed1-1.fna.fbcdn.net/v/t1.0-9/26220206_1795487000462973_6674370173638008139_n.jpg?oh=9ae52c85eaa06a1ba48fa669b873c46d&oe=5B4190CD')
-          #active-profile-info
-            strong#active-profile-name Chris
-            | ,
-            span#active-profile-age 21
-          #voting-controls
-            #vote-up.vote-btn
-              i.fa.fa-thumbs-o-up.fa-3x(aria-hidden='true')
-            #vote-down.vote-btn
-              i.fa.fa-thumbs-o-down.fa-3x(aria-hidden='true')
+        .matching-subpanel#matching-subpanel-joined
+          #no-users-left There are no users left to match with!
+          #matching-subpanel-2
+            #active-profile-img-wrap
+              img#active-profile-img(src='images/default-profile.png')
+            #active-profile-info
+              strong#active-profile-name Chris
+              | ,
+              span#active-profile-age 21
+            #voting-controls
+              #vote-up.vote-btn
+                i.fa.fa-thumbs-o-up.fa-3x(aria-hidden='true')
+              #vote-down.vote-btn
+                i.fa.fa-thumbs-o-down.fa-3x(aria-hidden='true')

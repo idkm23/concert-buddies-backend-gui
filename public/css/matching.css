@@ -63,11 +63,21 @@ h4 {
   display: none;
 }
 
+#no-users-left {
+  display: none;
+  margin: 0 auto;
+}
+
+#matching-subpanel-joined {
+  margin: auto;
+}
+
 #matching-subpanel-2 {
+  display: none;
   margin: 0 auto;
   min-height: 450px;
   min-width: 450px;
-  max-width: 600px;
+  max-width: 450px;
   height: 100%;
   width: 100%;
 }
@@ -94,8 +104,11 @@ h4 {
 }
 
 #active-profile-info {
+  position: relative;
   text-align: left;
   padding: 10px;
+  margin-top: -8px;
+  background-color: white;
   font-size: 20px;
   border: 1px solid black;
   border-radius: 0 0 3px 3px;
