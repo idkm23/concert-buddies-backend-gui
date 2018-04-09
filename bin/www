@@ -7,7 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('express-sequelize');
 var http = require('http');
+var socket = require('socket.io');
 var models = require('../models');
+var passportSocketIo = require('passport.socketio');
 
 /**
  * Get port from environment and store in Express.
@@ -15,21 +17,35 @@ var models = require('../models');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-  /**
-   * Create HTTP server.
-   */
+/**
+ * Create HTTP server.
+ */
 var server = http.createServer(app);
 
-models.sequelize.sync({alter: true}).then(function() {
-  /**
-   * Listen on provided port, on all network interfaces.
-   */
-  server.listen(port, function() {
-    debug('Express server listening on port ' + server.address().port);
+var io = socket(server);
+io.use(passportSocketIo.authorize({
+  secret: 'SharingIsCaring1',
+  store: app.session_store
+}));
+var chatSocket = io.of('/chat');
+io.on('connection', function(socket) {
+  var user = socket.request.user;
+  app.socket_map[user.id] = socket;
+  socket.on('disconnect', function() {
+      app.socket_map[user.id] = null;
   });
-  server.on('error', onError);
-  server.on('listening', onListening);
 });
+
+models.sequelize.sync({alter: true}).then(function() {
+    /**
+     * Listen on provided port, on all network interfaces.
+     */
+    server.listen(port, function() {
+        debug('Express server listening on port ' + server.address().port);
+        });
+    server.on('error', onError);
+    server.on('listening', onListening);
+    });
 
 /**
  * Normalize a port into a number, string, or false.

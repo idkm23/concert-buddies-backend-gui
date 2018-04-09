@@ -9,94 +9,23 @@ html(lang='en')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     // jQuery
     script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(src='/socket.io/socket.io.js')
     script(src='javascript/chat.js')
   body
     .page-content
       #contact-panel
-        .contact
-          .pic(style="background-image:url(https://scontent.fbed1-2.fna.fbcdn.net/v/t1.0-9/28056361_390182054786776_630299218789513382_n.jpg?_nc_cat=0&_nc_eui2=v1%3AAeFMatWdkuaUZtzM-AM-5pH4DTHs4uBVlTHvOme2wGQnLJRuJ8-CJbDcmdWWeFW8a0JiA8g2jTRVrwLDQYwUqOYWMeOmL0yzseWqi8K3osI84A&oh=d27f9482afefc844cbf09db7b1bd8890&oe=5B6CBC26)")
-          .text_info
-            .name Sara Leonard
-            .last_msg :) i had a good time last ni...
-
-        .contact
-          .pic(style="background-image:url(https://scontent.fbed1-2.fna.fbcdn.net/v/t1.0-9/26730784_376146226190359_8358172137551770339_n.jpg?_nc_cat=0&_nc_eui2=v1%3AAeG_8yHIWYW2nD5eNFJLeETLRtpXCjkmPHtzbu8ctay3k_wr3NAFYmWIFvFyDejBUOhDml8NcVNhMcUzKi3INngJWFcwDi7GtzhQtTivJLiQDg&oh=01874aaa7161a180221adf3bb81a9550&oe=5B68C8C6)")
-          .text_info
-            .name Sara Smith 
-            .last_msg I'll pick you up at 8
-
-        .contact
-          .pic(style="background-image:url(https://scontent.fbed1-2.fna.fbcdn.net/v/t1.0-9/23244475_1269592716477890_6796965774281840896_n.jpg?_nc_cat=0&_nc_eui2=v1%3AAeFVK6PBhjOqprqBokxj4EBZkObCDaTyGiyMENKHEbnDXTQ_TwaQg0k2Wf4pH78RGoYuB5P-SGiMiANVv2FwnV0JEgiym6KfJHgXV2LXr0Hksg&oh=de3a35c089ca4756c3c708a35ac19705&oe=5B270F24)")
-          .text_info
-            .name Hung Nguyen 
-            .last_msg I'm at the entrance
-
+        #no-matches-contact You have no matches!
       #chat-panel
-        #chat-log
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.to
-            .spacer
-            .message hi :)
-          .message_row.from
-            .message yo wassup
-            .spacer
-          .message_row.to
-            .spacer
-            .message u look nice lets go to concertttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
-          .message_row.from
-            .message yes i agree lets do it, come pick me up at 3 Acacia St. Merrimack, NH. u wana come around 5pm?
-            .spacer
-          .message_row.to
-            .spacer
-            .message sounds good
-          .message_row.to
-            .spacer
-            .message here
-          .message_row.from
-            .message :) i had a good time last night
-            .spacer
+        #chat-log-holder
         #chat-input-bar
           textarea(type="text" placeholder="Send a message")#chat-input
           #chat-send-btn.fa.fa-envelope.fa-2x
       #info-panel
-        .active_pic(style="background-image:url(https://scontent.fbed1-2.fna.fbcdn.net/v/t1.0-9/28056361_390182054786776_630299218789513382_n.jpg?_nc_cat=0&_nc_eui2=v1%3AAeFMatWdkuaUZtzM-AM-5pH4DTHs4uBVlTHvOme2wGQnLJRuJ8-CJbDcmdWWeFW8a0JiA8g2jTRVrwLDQYwUqOYWMeOmL0yzseWqi8K3osI84A&oh=d27f9482afefc844cbf09db7b1bd8890&oe=5B6CBC26)")
+        #active_pic
         div
-          .active_name Sara Leonard
+          #active_name
           | , 
-          .active_age 20
-        | <br /><strong>Event Matched:<br /></strong> 
-        a(href="/matching?event_id=vvG1iZfzGrpeS2" target="_blank").active_event
-          | Taylor Swift reputation Stadium Tour
-        button.remove_friend Block User
+          #active_age
+        | <br /><strong>Event(s) Matched:<br /></strong> 
+        #active_events
+        button.remove_friend Remove User

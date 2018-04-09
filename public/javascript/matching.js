@@ -25,7 +25,6 @@ $(document).ready(function() {
     like_user(false);
   });
   if (has_joined == 'true') {
-    load_next_match();
     set_layout(JOINED);
   } else {
     set_layout(HASNT_JOINED);
@@ -34,6 +33,7 @@ $(document).ready(function() {
 
 function set_layout(layout_id) {
   if (layout_id == JOINED) {
+    load_next_match();
     $("#matching-subpanel-joined").show();
     $("#leave_event_btn").show();
     $("#matching-subpanel-1").hide();

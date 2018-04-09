@@ -22,6 +22,12 @@ body {
   overflow-y: scroll;
 }
 
+#no-matches-contact {
+  display: none;
+  margin: 40px 20px;
+  text-align: center;
+}
+
 .contact {
   display: flex;
   border-bottom: 1px solid #d8d8d8;
@@ -36,6 +42,7 @@ body {
   border-radius: 10%;
   background-size: cover;
   background-position: 50% 50%;
+  border: 1px solid #bbb;
 }
 
 .contact .text_info {
@@ -61,10 +68,14 @@ body {
   overflow-x: hidden;
 }
 
-#chat-log {
+#chat-log-holder {
   flex-grow: 1;
   overflow-y: scroll;
   padding: 10px;
+}
+
+.chat-log {
+  display: none;
 }
 
 .message_row {
@@ -92,7 +103,6 @@ body {
 
 .message_row.to .message {
   color: white;
-  background-color: #0084ff;
 }
 
 .message_row.from .message {
@@ -101,7 +111,8 @@ body {
 
 #chat-input-bar {
   display: flex;
-  height: 120px;
+  min-height: 75px;
+  max-height: 75px;
   border-top: 1px solid black;
 }
 
@@ -135,28 +146,38 @@ body {
   padding: 15px;
 }
 
-.active_pic{
+#info-panel * {
+  display: none;
+}
+
+#active_pic{
   margin-bottom: 15px ;
   width: 270px;
   height: 270px;
   border-radius: 2%;
   background-size: cover;
   background-position: 50% 50%;
+  border: 1px solid #bbb;
 }
 
-.active_name {
+#active_name {
   display: inline-block;
   font-weight: bold;
 }
 
-.active_age {
+#active_age {
   display: inline-block;
 }
 
+#active_events {
+  margin-bottom: auto;
+}
+
 .active_event {
+  display: block;
+  margin-bottom: 5px;
   color: #00E;
   text-decoration: underline;
-  margin-bottom: auto;
 }
 
 .active_event:visited {
@@ -168,6 +189,7 @@ body {
   height: 31px;
   margin: 15px auto;
   padding: 5px;
+  cursor: pointer;
   background-color: #c33636;
   border: 3px outset #c33636;
   color: white;

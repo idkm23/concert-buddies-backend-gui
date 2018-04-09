@@ -7,6 +7,7 @@ var env = require('dotenv').load()
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 var models = require('./models');
 
 var app = express();
@@ -14,6 +15,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.socket_map = [];
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -23,9 +25,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// make session store
+app.session_store = new SequelizeStore({
+  db: models.sequelize
+});
+
+
 //load passport strategies
 require('./config/passport/passport.js')(passport, models.User);
-app.use(session({ secret: 'SharingIsCaring1', resave: true, saveUninitialized:true})); // session secret
+app.use(session({
+  secret: 'SharingIsCaring1',
+  store: app.session_store,
+  resave: false
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 

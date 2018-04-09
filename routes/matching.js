@@ -1,6 +1,7 @@
 var http = require('http');
 var convertTime = require('convert-time');
 var Sequelize = require('sequelize');
+var Op = Sequelize.Op;
 
 var utils = require('./utils');
 var tm = utils.tm;
@@ -82,11 +83,11 @@ module.exports = function(app, passport) {
             attributes: ['user_id'],
             where: { 
               user_id: {
-                [Sequelize.Op.not]: req.user.id
+                [Op.not]: req.user.id
               },
               event_id: req.query.event_id,
               seq_id: {
-                [Sequelize.Op.gte]: next_user.next_seq_id
+                [Op.gte]: next_user.next_seq_id
               },
             },
             order: [
@@ -159,11 +160,11 @@ module.exports = function(app, passport) {
               attributes: ['user_id', 'seq_id'],
               where: { 
                 user_id: {
-                  [Sequelize.Op.not]: req.user.id
+                  [Op.not]: req.user.id
                 },
                 event_id: req.body.event_id,
                 seq_id: {
-                  [Sequelize.Op.gte]: target_seq_id 
+                  [Op.gte]: target_seq_id 
                 },
               }
             });
@@ -178,8 +179,8 @@ module.exports = function(app, passport) {
               var next_seq_id = target_seq_id + 1;
               if (target_seq_id == self_seq_id
                 || target_seq_id+1 == self_seq_id) {
-                next_seq_id += 1;
-              }
+                  next_seq_id += 1;
+                }
               next_user.next_seq_id = next_seq_id;
             }
             next_user.save().then(() => {
@@ -202,10 +203,12 @@ module.exports = function(app, passport) {
                     Matches.bulkCreate([
                       { 
                         user_id: req.user.id, 
+                        event_id: req.body.event_id,
                         matched_user_id: liked_user.user_id 
                       },
                       {
                         user_id: liked_user.user_id, 
+                        event_id: req.body.event_id,
                         matched_user_id: req.user.id 
                       }
                     ]).then(() => {
@@ -257,24 +260,86 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.post('/api/matching/remove', utils.isLoggedIn, function(req, res) {
+    //remove from matching, remove from liked_users
+    Matches.destroy({
+      where: {
+        [Op.or]: [
+          {[Op.and]: {
+            user_id: req.user.id,
+            matched_user_id: req.body.matched_user_id
+          }},
+          {[Op.and]: {
+            user_id: req.body.matched_user_id,
+            matched_user_id: req.user.id
+          }}
+        ]
+      }
+    }).then(() => {
+      return Liked_Users.destroy({
+        where: {
+          user_id: req.user.id,
+          liked_user_id: req.body.matched_user_id
+        }
+      });
+    }).then(() => {
+      res.json({
+        status: 0,
+        message: "Success, user removed.",
+        req: req.body
+      });
+    }).catch(err => {
+      console.log(err);
+      res.json({
+        status: 1,
+        message: err.message,
+        req: req.body
+      });
+    });
+  });
+
   /* get matches via GET, aggregates events in-case a user has matched
    * with another across multiple events.
    **/
   app.get('/api/matching/get_matches', utils.isLoggedIn, function(req, res) {
+    var matches_with_events = [];
     Matches.findAll({
       attributes: {
         include: [
           [Sequelize.fn('ARRAY_AGG', Sequelize.col('event_id')), 'event_ids']
         ],
-        exclude: ['id', 'event_id', 'createdAt', 'updatedAt']
+        exclude: ['id', 'user_id', 'event_id', 'createdAt', 'updatedAt']
       },
       group: ['user_id', 'matched_user_id'],
       where: {
         user_id: req.user.id
       }
     }).then(matches => {
-      res.json(matches);
-    });
+      var matched_ids = [];
+      matches.forEach(function(match) {
+        var id = match.matched_user_id;
+        matched_ids.push(+id);
+        matches_with_events[id] = match.get('event_ids');
+      });
+      if (matched_ids.length != 0) {
+        User.findAll({
+          where: {
+            id: {
+              [Op.or]: matched_ids
+            }
+          },
+          attributes: {
+            exclude: ['createdAt', 'updatedAt', 'password', 'last_name']
+          }
+        }).then(match_profiles => {
+          for (let i = 0; i < match_profiles.length; i++) {
+            match_profiles[i].dataValues.events = matches_with_events[match_profiles[i].id];
+          }
+          res.json(match_profiles);
+        });
+      } else {
+        res.json([]);
+      }
+    })
   });
-
 };
