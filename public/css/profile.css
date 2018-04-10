@@ -2,6 +2,7 @@ div.page-content{
     clear: both;
     display: flex;
     width: 80%;
+    max-width: 150vh;
     min-width: 923px;
     height: 100%;
     margin: 50px auto;
@@ -9,14 +10,14 @@ div.page-content{
 }
 
 div.profile-pics {
-    flex: 50%;
+    flex: 1;
     width: 100%;
 }
 
 div.profile-desc {
-    flex: 50%;
+    flex: 1;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 25px;
 }
 
 h2 {
@@ -31,16 +32,56 @@ br {
     clear: both;
 }
 
+.carousel-wrapper {
+    display: inline;
+}
+
+.img-carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    border: 4px ridge;
+}
+
+.image-card {
+    position: relative;
+    min-width: 200px;
+    min-height: 200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 15px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    border: 2px dotted;
+}
+
+.remove-image-btn {
+    position: absolute;
+    opacity: 0;
+    display: inline;
+    bottom: 10px;
+    transition: .5s ease;
+    clear: both;
+}
+
+.image-card:hover .remove-image-btn{
+    opacity: 1;
+    z-index: 1;
+}
+
 
 textarea {
+    box-sizing: border-box;
     resize: none;
     width: 100%;
     height: 200px;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    padding: 20px 50px;
 }
 
 ::-webkit-input-placeholder {
     text-align: center;
-    padding-top: 80px;
+    padding-top: 60px;
 }

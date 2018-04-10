@@ -96,8 +96,6 @@ function setMyEvents(eventIdArray) {
         item.innerHTML = itemContent;
         rootDiv.appendChild(item);
         
-        return;
-        
     } else {
         
         // Else create a div with the info on each event
