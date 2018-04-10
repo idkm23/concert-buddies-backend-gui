@@ -15,6 +15,7 @@ module.exports = function(sequelize, DataTypes) {
 //    },
     dob: DataTypes.DATE,
     gender: DataTypes.BOOLEAN, // false = male, true = female
-    pictures: DataTypes.ARRAY(DataTypes.BLOB)
+    pictures: DataTypes.ARRAY(DataTypes.BLOB),
+    about: DataTypes.TEXT
   });
 }

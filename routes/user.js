@@ -9,7 +9,11 @@ module.exports = function(app, passport) {
    * example url: /api/user/fetch?user_id=12341
    **/
   app.get('/api/user', function(req, res) {
-    User.findById(req.query.user_id, {}).then(user => {
+    var id = req.query.user_id;
+    if (id == null) {
+      id = req.user.id;
+    }
+    User.findById(id, {}).then(user => {
       delete user.dataValues.password;
       res.json(user);
     });

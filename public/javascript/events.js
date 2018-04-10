@@ -100,13 +100,13 @@ function setMyEvents(eventIdArray) {
         
         // Else create a div with the info on each event
         var itemTemplate = "<a href=\"{{url}}\">" +
-                             "<h4>{{name}}</h4>" +
-                             "<p>{{date}}</p>" +
+                             "<div class='joined-event'>" +
+                               "<h4>{{name}}</h4>" +
+                               "<p>{{date}}</p>" +
+                             "</div>" +
                            "</a>";
         eventIdArray.forEach(function(val, index) { 
-            var item = document.createElement("div");
-            item.className = "joined-event";
-            var itemContent = itemTemplate.replace(/{{url}}/g, "/matching?event_id=" + val);
+            var item = itemTemplate.replace(/{{url}}/g, "/matching?event_id=" + val);
 
             var searchUrl = "https://app.ticketmaster.com/discovery/v2/events/" +
                 val +
@@ -119,10 +119,9 @@ function setMyEvents(eventIdArray) {
                 success: function(json) {
                     console.log(json);
 
-                    itemContent = itemContent.replace(/{{name}}/g, json.name);
-                    itemContent = itemContent.replace(/{{date}}/g, json.dates.start.localDate);
-                    item.innerHTML = itemContent;
-                    rootDiv.appendChild(item);
+                    item = item.replace(/{{name}}/g, json.name);
+                    item = item.replace(/{{date}}/g, json.dates.start.localDate);
+                    rootDiv.insertAdjacentHTML('beforeend', item);
                 },
                 error: function(xhr, status, err) {
                     console.log(err);

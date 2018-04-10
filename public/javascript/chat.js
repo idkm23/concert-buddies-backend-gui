@@ -71,8 +71,8 @@ function load() {
         if (matches[match.id].pictures == null) {
           matches[match.id].profile_pic = "url('/images/default-profile.png')";
         } else {
-          matches[match.id].profile_pic =
-            "url('data:image/png;base64," + matches[match.id].pictures[0] + "')";
+          matches[match.id].profile_pic = "url('" + _arrayBufferToBase64(matches[match.id].pictures[0].data) + "')";
+          console.log(matches[match.id].profile_pic);
         }
 
         //load left panel
@@ -309,4 +309,20 @@ function calculate_age(_birthday) {
 
 function is_space(str) {
   return (str.replace(/\s/g, '').length == 0);
+}
+
+/*  Take the byte array from the database and convert it back to a string
+    Credit: https://stackoverflow.com/questions/9267899/arraybuffer-to-base64-encoded-string */
+function _arrayBufferToBase64( buffer ) {
+    var binary = '';
+    var bytes = new Uint8Array( buffer );
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode( bytes[ i ] );
+    }
+    
+    return binary;
+    
+    // btoa is not needed when original string sent to the DB was already base64
+    //return window.btoa( binary );
 }

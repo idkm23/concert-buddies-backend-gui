@@ -10,6 +10,15 @@ document.addEventListener('DOMContentLoaded', function () {
         $("#file-input").val(null);
         $("#file-input").trigger("click");
     });
+
+    $("#update-button").click(function() {
+      console.log('test');
+      var about = $('#description').val();
+      $.post("/api/profile/about", {about: about})
+        .done(function(data) {
+          console.log(data);
+        });
+    });
     
     $("#file-input").change(function() {
         var fileName = this.files[0];
@@ -23,6 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     
+    $.get("/api/user/", function(user) {
+      if (user.about != null) {
+        $('#description').val(user.about);
+      }
+    });
+
     $.get("/api/profile/pics", function(data){
         console.dir(data);
         
