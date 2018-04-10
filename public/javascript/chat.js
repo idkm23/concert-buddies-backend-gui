@@ -1,5 +1,5 @@
 var tm_api_key = "?apikey=etiKzCoqnYu3LmsKbArqF6uxdAJGaENS";
-var tm_url = "http://app.ticketmaster.com/discovery/v2/events/";
+var tm_url = "https://app.ticketmaster.com/discovery/v2/events/";
 
 var socket;
 $(document).ready(function() {
