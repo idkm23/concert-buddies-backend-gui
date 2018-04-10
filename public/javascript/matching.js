@@ -33,7 +33,9 @@ $(document).ready(function() {
 
 function set_layout(layout_id) {
   if (layout_id == JOINED) {
-    load_next_match();
+    if (candidate == null) {
+      load_next_match();
+    }
     $("#matching-subpanel-joined").show();
     $("#leave_event_btn").show();
     $("#matching-subpanel-1").hide();
@@ -113,7 +115,10 @@ function fetch_candidates(callback) {
 
 var candidate;
 function load_next_match() {
+  candidate = null;
   if (candidate_queue.length == 0) {
+    $('#matching-subpanel-2').hide();
+    $('.lds-css.ng-scope').show();
     fetch_candidates(function() {
       if (candidate_queue.length == 0) {
         load_empty_message();
@@ -141,12 +146,14 @@ function load_next_match_cont() {
   $('#active-profile-about').html(candidate.about);
   $('#active-profile-name').html(candidate.first_name);
   $('#active-profile-age').html(candidate.age);
-  //$('#no-users-left').hide();
+  $('#no-users-left').hide();
+  $('.lds-css.ng-scope').hide();
   $('#matching-subpanel-2').show();
 }
 
 function load_empty_message() {
   $('#matching-subpanel-2').hide();
+  $('.lds-css.ng-scope').hide();
   $('#no-users-left').show();
 }
 
