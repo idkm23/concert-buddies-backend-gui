@@ -138,6 +138,7 @@ function load_next_match_cont() {
   var age;
   age = candidate.dob;
   $('#active-profile-img').attr('src', prof_pic);
+  $('#active-profile-about').html(candidate.about);
   $('#active-profile-name').html(candidate.first_name);
   $('#active-profile-age').html(candidate.age);
   //$('#no-users-left').hide();
