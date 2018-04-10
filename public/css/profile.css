@@ -1,8 +1,16 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  min-width: 780px;
+  height: 100%;
+  width: 100%;
+}
+
 div.page-content{
     clear: both;
     display: flex;
-    width: 80%;
-    max-width: 150vh;
+    width: 70%;
     min-width: 923px;
     height: 100%;
     margin: 50px auto;
@@ -10,18 +18,26 @@ div.page-content{
 }
 
 div.profile-pics {
-    flex: 1;
+    flex-grow: 1;
+    display: inline-block;
     width: 100%;
 }
 
 div.profile-desc {
-    flex: 1;
+    flex-grow: 1;
     width: 100%;
     margin-top: 25px;
 }
 
-h2 {
-    display: inline-block;
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header h2 {
+    width: 25%;
 }
 
 button {
@@ -84,4 +100,20 @@ textarea {
 ::-webkit-input-placeholder {
     text-align: center;
     padding-top: 60px;
+}
+
+/* Create loading icon
+   Credit: https://www.w3schools.com/howto/howto_css_loader.asp */
+#loading-icon {
+    border: 9px solid #e6e6e6;
+    border-top: 9px solid #000;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    display: inline-block;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function getSearchResults() {
-    var param = document.getElementById("search-parameter").value;
+    //var param = document.getElementById("search-parameter").value;
     var searchTerms = document.getElementById("search-box").value;
-    console.log(param);
+    //console.log(param);
     console.log(searchTerms);
     
     searchTerms = searchTerms.replace(/ /g, '+');

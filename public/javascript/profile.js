@@ -31,13 +31,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 var imageString = _arrayBufferToBase64(data[i].data);
                 addImageCard(imageString, imageContainer);
             }
+            // Remove loading icon and display div in its place
+            document.getElementById("loading-icon").style.display = "none";
+            imageContainer.style.display = "flex";
         }
     });
 });
 
 function addImageCard(imageData, rootElement) {
     var template = "<img src={{data}} class=\"image\" height=\"250\" data-index=\"{{index}}\">" +
-                   "<button class=\"remove-image-btn\" onclick=\"deleteFile(event);\">Delete</button>";
+                   "<button class=\"remove-image-btn button\" onclick=\"deleteFile(event);\">Delete</button>";
     var item = document.createElement("div");
     item.className = "image-card";
     item.innerHTML = template.replace(/{{data}}/g, imageData).replace(/{{index}}/g, numPictures);
@@ -97,9 +100,12 @@ function uploadFile(fileName) {
  *   The click event containing the button that was clicked
  */
 function deleteFile(event) {
-    var image = $(event.target).siblings('img');  // Get the img for that button
+    var btn = $(event.target);
+    var image = btn.siblings('img');  // Get the img for that button
     var imgIndex = image.attr('data-index');
     console.log(imgIndex);
+    
+    btn.html("Deleting...");
     
     $.ajax({
         url:'/api/profile/delete_pic',
@@ -111,6 +117,10 @@ function deleteFile(event) {
             console.dir(res);
             image.parent().remove();  // Remove whole card from list
             refreshIndices();
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            console.log(textStatus);
+            btn.html("Error");
         }
     });
 }
@@ -123,4 +133,19 @@ function refreshIndices() {
         $(images[index]).attr('data-index', index);
         numPictures++;
     }
+}
+
+function updateUserDescription() {
+    var descText = $.trim($("#description").val());
+    
+    $.ajax({
+        url:'/api/profile/set_description',
+        type:'POST',
+        data:{'text':descText},
+        dataType:'json',
+        success: function(res) {
+            console.log("updated description: ");
+            console.dir(res);
+        }
+    })
 }

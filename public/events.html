@@ -36,14 +36,16 @@
         <div class="event-search"> 
             <h2>Find a new event</h2>
             <br>
+            <!--
             <select id="search-parameter">
                 <option value="Artist">Artist</option>
                 <option value="Venue">Venue</option>
                 <option value="Location">Location</option>
             </select>
+            -->
             <div class="search-container">
                 <form action="javacript:getSearchResults();">
-                    <input type="text" id="search-box" placeholder="Search.." name="search">
+                    <input type="text" id="search-box" placeholder="Search by name of artist or venue" name="search">
                     <button type="submit" onclick="getSearchResults();"><i class="fa fa-search"></i></button>
                 </form>
             </div>
