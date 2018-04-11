@@ -71,6 +71,7 @@ module.exports = function(app, passport) {
 
   app.get('/api/matching/get_potential_matches', utils.isLoggedIn,
     function(req, res) {
+      var _uaes;
       Next_User.findOne({
         attributes: ['next_seq_id'],
         where: {
@@ -101,6 +102,7 @@ module.exports = function(app, passport) {
         }
       }).then(uaes => {
         if (uaes.length != 0) {
+          _uaes = uaes;
           var user_ids = [];
           uaes.forEach(function(uae) {
             user_ids.push(uae.user_id);
@@ -113,7 +115,16 @@ module.exports = function(app, passport) {
               id: user_ids
             }
           }).then(users => {
-            res.json(users);
+            var ordered_users = [];
+            for (let i = 0; i < uaes.length; i++) {
+              for (let j = 0; j < users.length; j++) {
+                if (uaes[i].user_id == users[j].id) {
+                  ordered_users.push(users[j]);
+                  break;
+                }
+              }
+            }
+            res.json(ordered_users);
           });
         } else {
           res.json("{}");
