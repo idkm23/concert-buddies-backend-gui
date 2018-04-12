@@ -46,12 +46,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 var imageString = _arrayBufferToBase64(data[i].data);
                 addImageCard(imageString, imageContainer);
             }
-            // Remove loading icon and display div in its place
-            document.getElementById("loading-icon").style.display = "none";
-            imageContainer.style.display = "flex";
         }
+
+        replaceLoadingIcon();
     });
 });
+
+function replaceLoadingIcon() {
+    // Remove loading icon and display content div in its place
+    document.getElementById("loading-icon").style.display = "none";
+    if(numPictures > 0) {
+        toggleImageContainer(true);
+    } else {
+        togglePlaceholder(true);
+    }
+}
+
+function toggleImageContainer(makeVisible) {
+    if(makeVisible) {
+        togglePlaceholder(false);
+        imageContainer.style.display = "flex";
+    } else {
+        imageContainer.style.display = "none";
+        togglePlaceholder(true);
+    }
+}
+function togglePlaceholder(makeVisible) {
+    if(makeVisible) {
+        document.getElementById("empty-placeholder").style.display = "block";
+    } else {
+        document.getElementById("empty-placeholder").style.display = "none";
+    }
+}
 
 function addImageCard(imageData, rootElement) {
     var template = "<img src={{data}} class=\"image\" height=\"250\" data-index=\"{{index}}\">" +
@@ -61,6 +87,12 @@ function addImageCard(imageData, rootElement) {
     item.innerHTML = template.replace(/{{data}}/g, imageData).replace(/{{index}}/g, numPictures);
     
     rootElement.appendChild(item);
+    
+    // If this is first pic being added, turn on image container
+    if(numPictures < 1) {
+        toggleImageContainer(true);
+    }
+    
     numPictures++;
 }
 
@@ -140,6 +172,9 @@ function deleteFile(event) {
     });
 }
 
+/* This function is used to ensure that the position of the image card
+ * on screen always corresponds to the index of that image in the database
+ */
 function refreshIndices() {
     var images = document.getElementsByClassName("image");
     console.log("num images: " + images.length);
@@ -147,6 +182,11 @@ function refreshIndices() {
     for(var index = 0; index < images.length; index++) {
         $(images[index]).attr('data-index', index);
         numPictures++;
+    }
+    
+    // If currently no pictures, turn off container
+    if(numPictures == 0) {
+        toggleImageContainer(false);
     }
 }
 

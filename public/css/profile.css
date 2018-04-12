@@ -59,6 +59,11 @@ br {
     border: 4px ridge;
 }
 
+.no-images {
+    display: flex;
+    justify-content: center;
+}
+
 .image-card {
     position: relative;
     min-width: 200px;
