@@ -26,12 +26,14 @@ div.nav-bar {
   display: inline-block;
 }
 
+.events-box,
 .chat-box,
 .profile-box,
 .logout-box {
     height: 100%;
 }
 
+.events-box button,
 .chat-box button,
 .profile-box button,
 .logout-box button{
@@ -44,6 +46,7 @@ div.nav-bar {
     background: none;
 }
 
+.events-box button:hover,
 .chat-box button:hover,
 .profile-box button:hover,
 .logout-box button:hover {
