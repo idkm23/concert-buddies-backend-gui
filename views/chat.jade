@@ -14,6 +14,9 @@ html(lang='en')
   body
     .page-content
       #contact-panel
+        .lds-css.ng-scope.left
+          .lds-rolling
+            div
         #no-matches-contact You have no matches!
       #chat-panel
         #chat-log-holder
@@ -21,6 +24,9 @@ html(lang='en')
           textarea(type="text" placeholder="Send a message")#chat-input
           #chat-send-btn.fa.fa-envelope.fa-2x
       #info-panel
+        .lds-css.ng-scope
+          .lds-rolling
+            .ldiv
         #active_pic
           #active-profile-img-overlay
             .img-nav#img-left-nav

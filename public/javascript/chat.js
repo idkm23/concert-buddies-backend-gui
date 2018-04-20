@@ -215,6 +215,7 @@ function showChat(receiver_id) {
   if (chats[active_chat] != null) {
     chats[active_chat].hide();
   }
+  $('.lds-css').hide();
   if (receiver_id == -1) {
     active_chat = -1;
     $('#info-panel').children().hide();
@@ -225,7 +226,8 @@ function showChat(receiver_id) {
     return;
   } else {
     contacts[receiver_id].css('background-color', 'rgb(245, 245, 245)');
-    $('#info-panel').children().show();
+    $('#info-panel').children().not('.lds-css').show();
+    $('#info-panel').children().not('.lds-css').children().css('display', 'inline');
     $('#no-matches-contact').hide();
   }
 

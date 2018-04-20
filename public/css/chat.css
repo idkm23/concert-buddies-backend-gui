@@ -146,8 +146,20 @@ body {
   padding: 15px;
 }
 
-#info-panel * {
+#info-panel div:not(.lds-css):not(.ng-scope):not(.lds-rolling):not(.ldiv),
+#info-panel button,
+#info-panel strong {
   display: none;
+}
+
+.lds-css.left {
+  margin-top: 15px;
+}
+
+.lds-css {
+  position: relative;
+  width: 82px;
+  margin: 0 auto;
 }
 
 #active_pic{
@@ -206,8 +218,6 @@ body {
 .img-nav:hover {
   background-color: #000;
 }
-
-
 
 #active_name {
   display: inline-block;
