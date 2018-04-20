@@ -298,3 +298,57 @@ h4 {
   word-wrap: break-word;
   overflow: hidden;
 }
+
+#match-found-overlay {
+  display: none;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 5;
+  cursor: pointer;
+  text-align: center;
+}
+
+#match-card {
+  position: relative;
+  display: inline-block;
+  margin: 150px auto;
+  padding: 30px;
+  background: white;
+  cursor: initial;
+}
+
+#close-match-card {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+
+#close-match-card:hover {
+  color: red;
+}
+
+#match-card h2 {
+  margin-top: 8px;
+}
+
+#match-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+#match-card a {
+  display: block;
+  width: 86.53px;
+  margin: 15px auto 0 auto;
+}
+
+#start-chatting-btn {
+}

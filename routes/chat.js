@@ -5,10 +5,19 @@ var utils = require('./utils');
 var models = require('../models');
 var Op = models.Sequelize.Op;
 var Chat = models.Chat;
+var User = models.User;
 
 module.exports = function(app, passport) {
   app.get('/chat', utils.isLoggedIn, function(req, res) {
-    res.render("chat");
+    res.render("chat", {
+      has_notification: false
+    });
+    if (req.user.notify == true) {
+      User.update(
+        { notify: false },
+        { where: { id: req.user.id } }
+      ).then(() => {});
+    }
   });
 
   app.get('/api/chat/get_chat', utils.isLoggedIn, function(req, res) {
@@ -40,19 +49,31 @@ module.exports = function(app, passport) {
       content: req.body.content,
       timestamp: Sequelize.fn('NOW')
     }).then(chat => {
-      var receiver_socket = app.socket_map[req.body.receiver_id];
-      if (receiver_socket != null) {
-        receiver_socket.emit('new_msg', JSON.stringify({
-          sender_id: req.user.id,
-          content: req.body.content
-        }), function(answer) {
-          res.json({
-            status: 0,
-            sent_via_socket: true,
-            message: "Success, message delivered",
-            answer: answer,
-            req: req.body
+     User.update(
+       { notify: true },
+       { where: { id: req.body.receiver_id } }
+     ).then(() => {});
+
+      var receiver_sockets = app.socket_map[req.body.receiver_id];
+      if (receiver_sockets != null && receiver_sockets.length > 0) {
+        receiver_sockets.forEach(function(receiver_socket) {
+          receiver_socket.emit('new_msg', JSON.stringify({
+            sender_id: req.user.id,
+            content: req.body.content
+          }), function(answer) {
+            if (answer.status == '0') {
+              User.update(
+                { notify: false },
+                { where: { id: req.body.receiver_id } }
+              ).then(() => {});
+            }
           });
+        });
+        res.json({
+          status: 0,
+          sent_via_socket: true,
+          message: "Success, message delivered",
+          req: req.body
         });
       } else {
         res.json({

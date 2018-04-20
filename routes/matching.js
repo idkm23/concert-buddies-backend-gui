@@ -50,6 +50,7 @@ module.exports = function(app, passport) {
         }
       }).then(user => {
         var has_joined = (user != null);
+        console.log(req.user);
         res.render('matching', {
           concert_title: tm_res.name,
           venue: venue.name,
@@ -58,7 +59,8 @@ module.exports = function(app, passport) {
           time: time,
           tm_url: tm_res.url,
           tm_pic: pic,
-          has_joined: has_joined
+          has_joined: has_joined,
+          has_notification: req.user.notify
         });
       });
     });
@@ -228,8 +230,28 @@ module.exports = function(app, passport) {
                           + '\' liked the next user in the queue',
                         match: 'true'
                       });
-                    });
+                      User.update(
+                        { notify: true },
+                        { where: { id: liked_user.user_id } }
+                      ).then(() => {});
 
+                      // notify other user 
+                      var receiver_sockets = app.socket_map[liked_user.user_id];
+                      if (receiver_sockets != null) {
+                        receiver_sockets.forEach(function(socket) {
+                          socket.emit('new_match', JSON.stringify({}),
+                            function(answer) {
+                              if (answer.status == '0') {
+                                User.update(
+                                  { notify: false },
+                                  { where: { id: liked_user.user_id } }
+                                ).then(() => {});
+                              }
+                            }
+                          );
+                        });
+                      }
+                    });
                   } else {
                     res.json({
                       message: 'Success, user \'' + req.user.id
@@ -317,14 +339,14 @@ module.exports = function(app, passport) {
     Matches.findAll({
       attributes: {
         include: [
-          [Sequelize.fn('ARRAY_AGG', Sequelize.col('event_id')), 'event_ids']
+          [Sequelize.fn('ARRAY_AGG', Sequelize.col('event_id')), 'event_ids'],
         ],
         exclude: ['id', 'user_id', 'event_id', 'createdAt', 'updatedAt']
       },
       group: ['user_id', 'matched_user_id'],
       where: {
         user_id: req.user.id
-      }
+      },
     }).then(matches => {
       var matched_ids = [];
       matches.forEach(function(match) {

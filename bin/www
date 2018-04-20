@@ -30,9 +30,14 @@ io.use(passportSocketIo.authorize({
 var chatSocket = io.of('/chat');
 io.on('connection', function(socket) {
   var user = socket.request.user;
-  app.socket_map[user.id] = socket;
+  if (app.socket_map[user.id] == null) {
+    app.socket_map[user.id] = [socket];
+  } else {
+    app.socket_map[user.id].push(socket);
+  }
   socket.on('disconnect', function() {
-      app.socket_map[user.id] = null;
+      var i = app.socket_map[user.id].indexOf(socket);
+      app.socket_map[user.id].splice(i, 1);
   });
 });
 

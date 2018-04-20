@@ -6,7 +6,9 @@ var User = models.User;
 
 module.exports = function(app, passport) {
   app.get('/profile', utils.isLoggedIn, function(req, res) {
-    res.render("profile");
+    res.render("profile", {
+      has_notification: req.user.notify
+    });
   });
 
   /* FETCH PROFILE PICS FOR USER via GET

@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title ConcertBuddies
+    link(href='https://fonts.googleapis.com/css?family=Roboto', rel='stylesheet')
+    // font awesome icon library
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='css/main.css')
+    link(rel='stylesheet', href='css/navbar.css')
+    // jQuery
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(src='/socket.io/socket.io.js')
+    script.
+      has_notification="#{has_notification}";
+    script(src='javascript/navbar.js')
+  body
+    .nav-bar
+      a(href='/')
+        h1.concert-buddies ConcertBuddies
+      .nav-buttons
+        a.events-box(href='events')
+          button.button(title='Find your events')
+            i.fa.fa-home
+            |  Events
+        a.chat-box(href='chat')
+          button.button(title='Chat with matches')
+            i.fa.fa-commenting-o#chat-icon
+            |  Chat
+        #new_match
+        #new_msg
+        a.profile-box(href='profile')
+          button.button(title='Edit your profile')
+            i.fa.fa-user-circle-o
+            |  Profile
+        a.logout-box(href='api/user/signout')
+          button.button(title='Log out')
+            i.fa.fa-sign-out
+            |  Logout

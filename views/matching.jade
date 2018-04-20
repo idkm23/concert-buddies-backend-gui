@@ -1,17 +1,21 @@
 doctype html
-include ../public/navbar.html
+include navbar
 html(lang='en')
   head
     meta(charset='UTF-8')
-    title ConcertBuddies
-    link(rel='stylesheet', href='css/main.css')
     link(rel='stylesheet', href='css/matching.css')
-    // jQuery
-    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
     script.
       has_joined="#{has_joined}";
     script(src='javascript/matching.js')
   body
+    #match-found-overlay
+      #match-card
+        i.fa.fa-times.fa-lg#close-match-card
+        h2 That's a match!
+        img#match-img
+        a(href="chat")
+          button#start-chatting-btn.button Chat Now
+        
     .page-content
       #concert-info-panel
         #concert-info-subpanel

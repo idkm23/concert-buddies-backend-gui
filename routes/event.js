@@ -6,7 +6,9 @@ var Next_User = models.Next_User;
 module.exports = function(app, passport) {
 
   app.get('/events', utils.isLoggedIn, function(req, res) {
-    res.render('events', {});
+    res.render('events', {
+      has_notification: req.user.notify
+    });
   });
 
   /* FETCH JOINED EVENTS FOR USER via GET

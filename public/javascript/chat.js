@@ -1,9 +1,9 @@
 var tm_api_key = "?apikey=etiKzCoqnYu3LmsKbArqF6uxdAJGaENS";
 var tm_url = "https://app.ticketmaster.com/discovery/v2/events/";
 
-var socket;
 $(document).ready(function() {
-  socket = io();
+  disable_notifications();
+  var socket = io();
   socket.on('new_msg', function(msg, callback){
     console.log(msg);
     var msg_obj = JSON.parse(msg);
@@ -14,6 +14,16 @@ $(document).ready(function() {
     callback({
       status: 0,
       message: 'Success: message received'
+    });
+  });
+  socket.on('new_match', function(match, callback) {
+    console.log(match);
+    var match_obj = JSON.parse(match);
+    // TODO: show match
+    window.location.href=window.location.href;
+    callback({
+      status: 0,
+      message: 'Success: match received'
     });
   });
   $('#chat-input').keydown(function(event) {

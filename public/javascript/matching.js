@@ -31,6 +31,18 @@ $(document).ready(function() {
     cycle_pic(1);
   });
 
+  $('#match-found-overlay').click(function() {
+    $('#match-found-overlay').hide();
+  }).children().click(function(e) {
+    return false;
+  });
+  $('#close-match-card').click(function() {
+    $('#match-found-overlay').hide();
+  });
+  $('#start-chatting-btn').click(function() {
+    window.location.href = "chat";
+  });
+
   if (has_joined == 'true') {
     set_layout(JOINED);
   } else {
@@ -121,7 +133,11 @@ function fetch_candidates(callback) {
 }
 
 var candidate;
-function load_next_match() {
+function load_next_match(resp) {
+  if (resp != null && resp.match == "true") {
+    showMatch();
+  }
+  
   candidate = null;
   if (candidate_queue.length == 0) {
     $('#matching-subpanel-2').hide();
@@ -141,7 +157,7 @@ function load_next_match() {
 function load_next_match_cont() {
   candidate = candidate_queue[0];
   candidate_queue.shift();
-  var prof_pic;
+  candidate.prof_pic;
   img_index = 0;
   $("#img-left-nav").hide();
   if (candidate.pictures != null) {
@@ -149,7 +165,7 @@ function load_next_match_cont() {
       candidate.pictures[i] =
         _arrayBufferToBase64(candidate.pictures[i].data);
     }
-    prof_pic = candidate.pictures[0];
+    candidate.prof_pic = candidate.pictures[0];
     if (candidate.pictures.length > 1) {
       $("#img-right-nav").show();
     } else {
@@ -157,12 +173,12 @@ function load_next_match_cont() {
     }
     
   } else {
-    prof_pic = 'images/default-profile.png';
+    candidate.prof_pic = 'images/default-profile.png';
     $("#img-right-nav").hide();
   }
   var age;
   age = candidate.dob;
-  $('#active-profile-img').attr('src', prof_pic);
+  $('#active-profile-img').attr('src', candidate.prof_pic);
   $('#active-profile-about').html(candidate.about);
   $('#active-profile-name').html(candidate.first_name);
   $('#active-profile-age').html(candidate.age);
@@ -210,4 +226,9 @@ function cycle_pic(shift) {
     }
     img_index = final_index;
   }
+}
+
+function showMatch() {
+  $('#match-img').attr('src', candidate.prof_pic);
+  $('#match-found-overlay').show();
 }
