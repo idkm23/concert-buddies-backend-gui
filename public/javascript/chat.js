@@ -36,6 +36,13 @@ $(document).ready(function() {
     });
   });
   $('#chat-send-btn').click(send_msg);
+  $('#img-left-nav').click(function() {
+    cycle_pic(-1);
+  });
+  $('#img-right-nav').click(function() {
+    cycle_pic(1);
+  });
+
   load();
 });
 
@@ -71,8 +78,11 @@ function load() {
         if (matches[match.id].pictures == null) {
           matches[match.id].profile_pic = "url('/images/default-profile.png')";
         } else {
-          matches[match.id].profile_pic = "url('" + _arrayBufferToBase64(matches[match.id].pictures[0].data) + "')";
-          console.log(matches[match.id].profile_pic);
+          for (let i = 0; i < matches[match.id].pictures.length; i++) {
+            matches[match.id].pictures[i] =
+              "url('" + _arrayBufferToBase64(matches[match.id].pictures[i].data) + "')";
+          }
+          matches[match.id].profile_pic = matches[match.id].pictures[0];
         }
 
         //load left panel
@@ -220,9 +230,17 @@ function showChat(receiver_id) {
   }
 
   var match = matches[receiver_id];
+  img_index = 0;
+  $('#img-left-nav').hide();
+  if (match.pictures == null || match.pictures.length < 2) {
+    $('#img-right-nav').hide();
+  } else {
+    $('#img-right-nav').show();
+  }
   $('#active_pic').css('background-image', match.profile_pic);
   $('#active_name').html(match.first_name);
   $('#active_age').html(calculate_age(match.dob));
+  $('#active_about').html(match.about);
   if (event_names[receiver_id] == null) {
     event_names[receiver_id] = '';
     if (match.events != null) {
@@ -258,6 +276,8 @@ function showChat(receiver_id) {
   var chat = chats[active_chat];
   chat.show();
   $('#active_events').children().show();
+  $('#active_pic').children().show();
+  $('#active_pic').children().children().children().css("display", 'inline');
   scrollToBottom();
 }
 
@@ -325,4 +345,28 @@ function _arrayBufferToBase64( buffer ) {
     
     // btoa is not needed when original string sent to the DB was already base64
     //return window.btoa( binary );
+}
+
+var img_index = 0;
+function cycle_pic(shift) {
+  if (active_chat == -1) {
+    return;
+  }
+
+  var match = matches[active_chat];
+  var final_index = img_index + shift;
+  if (final_index >= 0 && final_index < match.pictures.length) {
+    $('#active_pic').css('background-image', match.pictures[final_index]);
+    if (final_index == 0) {
+      $('#img-left-nav').hide();
+    } else {
+      $('#img-left-nav').show();
+    }
+    if (final_index == match.pictures.length-1) {
+      $('#img-right-nav').hide();
+    } else {
+      $('#img-right-nav').show();
+    }
+    img_index = final_index;
+  }
 }

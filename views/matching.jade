@@ -34,15 +34,23 @@ html(lang='en')
               div
           #no-users-left There are no users left to match with!
           #matching-subpanel-2
-            #active-profile-img-wrap
-              img#active-profile-img(src='images/default-profile.png')
+            #matching-card-col-1
+              #active-profile-img-wrap
+                img#active-profile-img(src='images/default-profile.png')
+                #active-profile-img-overlay
+                  .img-nav#img-left-nav
+                    i.fa.fa-angle-left.fa-2x
+                  .img-nav#img-right-nav
+                    i.fa.fa-angle-right.fa-2x
+              #active-profile-info
+                strong#active-profile-name Chris
+                | , #{''}
+                span#active-profile-age 21
+              #voting-controls
+                #vote-up.vote-btn
+                  i.fa.fa-thumbs-o-up.fa-3x(aria-hidden='true')
+                #vote-down.vote-btn
+                  i.fa.fa-thumbs-o-down.fa-3x(aria-hidden='true')
+            #matching-card-col-2
+              h1 About
               #active-profile-about
-            #active-profile-info
-              strong#active-profile-name Chris
-              | , #{''}
-              span#active-profile-age 21
-            #voting-controls
-              #vote-up.vote-btn
-                i.fa.fa-thumbs-o-up.fa-3x(aria-hidden='true')
-              #vote-down.vote-btn
-                i.fa.fa-thumbs-o-down.fa-3x(aria-hidden='true')

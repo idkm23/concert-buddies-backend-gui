@@ -6,7 +6,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 600px;
-  min-width: 780px;
+  min-width: 865px;
   height: 100%;
   width: 100%;
 }
@@ -24,6 +24,7 @@ body {
   padding: 25px;
   border-right: 1px solid black;
   flex-direction: column;
+  background-color: #f4f4ff;
 }
 
 #concert-info-subpanel {
@@ -77,13 +78,31 @@ h4 {
   margin: 0 auto;
   min-height: 450px;
   min-height: 450px;
-  min-width: 380px;
-  max-width: 380px;
-  height: 100%;
-  width: 100%;
+  min-width: 581px;
+  max-width: 581px;
+  height: 450px;
+  width: 581px;
 }
 
-#active-profile-img-wrap, #active-profile-info {
+#matching-card-col-1 {
+  display: inline-block;
+  float: left;
+  height: 450px;
+  width: 380px;
+}
+
+#matching-card-col-2 {
+  display: inline-block;
+  float: left;
+  background-color: #f4f4ff;
+  width: 200px;
+  height: 400px;
+  margin-top: 12px;
+  padding: 10px;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius: 0 3px 3px 0;
 }
 
 #active-profile-img {
@@ -91,7 +110,40 @@ h4 {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
 
+#active-profile-img-wrap {
+  display: inline-block;
+  position: relative;
+  height: 380px;
+  width: 380px;
+  overflow: hidden;
+  border: 1px solid black;
+  border-radius: 3px 3px 0 0;
+  background-color: black;
+}
+
+#active-profile-img-overlay {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.img-nav {
+  display: none;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 50px;
+  background-color: #111;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  line-height: 378px;
+
+  opacity: 0;
   transition: all 0.1s linear;
   -webkit-transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
@@ -99,37 +151,20 @@ h4 {
   -o-transition: all 0.1s linear;
 }
 
-#active-profile-img-wrap {
-  display: inline-block;
-	position: relative;
-	height: 380px;
-	width: 380px;
-  overflow: hidden;
-  border: 1px solid black;
-  border-radius: 3px 3px 0 0;
-  background-color: black;
+#img-left-nav {
+  left: 0px;
 }
 
-#active-profile-img-wrap:hover img {
-  opacity: 0.5;
+#img-right-nav {
+  right: 0px;
 }
 
-#active-profile-img-wrap:hover img~#active-profile-about {
-	display: inline-block;
+#active-profile-img-overlay:hover > .img-nav {
+  opacity: 0.6;
 }
 
-#active-profile-about {
-	display: none;
-	color: white;
-	font-weight: bold;
-	position: absolute;
-	top: 10px;
-	bottom: 10px;
-	left: 10px;
-	right: 10px;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  overflow: hide;
+.img-nav:hover {
+  background-color: #000;
 }
 
 #active-profile-info {
@@ -142,7 +177,8 @@ h4 {
   border: 1px solid black;
   border-radius: 0 0 3px 3px;
   border-top: none;
-	width: 380px;
+  width: 380px;
+  background-color: #f4f4ff;
 }
 
 #voting-controls {
@@ -157,6 +193,7 @@ h4 {
   padding: 8px;
   float: center;
   cursor: pointer;
+  background-color: #f4f4ff;
 
   -o-transition:.2s;
   -ms-transition:.2s;
@@ -299,4 +336,15 @@ h4 {
   height: 82px !important;
   -webkit-transform: translate(-41px, -41px) scale(0.41) translate(41px, 41px);
   transform: translate(-41px, -41px) scale(0.41) translate(41px, 41px);
+}
+
+#matching-card-col-2 h1 {
+  margin: 0 0 10px 0;
+}
+
+#active-profile-about {
+  height: 332px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  overflow: hidden;
 }

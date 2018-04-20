@@ -13,7 +13,6 @@ $(document).ready(function() {
   $('#join_event_btn').click(function() {
     join_event();
   });
-
   $('#leave_event_btn').click(function() {
     leave_event();
   });
@@ -24,6 +23,14 @@ $(document).ready(function() {
   $("#vote-down").click(function() {
     like_user(false);
   });
+
+  $('#img-left-nav').click(function() {
+    cycle_pic(-1);
+  });
+  $('#img-right-nav').click(function() {
+    cycle_pic(1);
+  });
+
   if (has_joined == 'true') {
     set_layout(JOINED);
   } else {
@@ -135,10 +142,23 @@ function load_next_match_cont() {
   candidate = candidate_queue[0];
   candidate_queue.shift();
   var prof_pic;
+  img_index = 0;
+  $("#img-left-nav").hide();
   if (candidate.pictures != null) {
-    prof_pic = _arrayBufferToBase64(candidate.pictures[0].data);
+    for (let i = 0; i < candidate.pictures.length; i++) {
+      candidate.pictures[i] =
+        _arrayBufferToBase64(candidate.pictures[i].data);
+    }
+    prof_pic = candidate.pictures[0];
+    if (candidate.pictures.length > 1) {
+      $("#img-right-nav").show();
+    } else {
+      $("#img-right-nav").hide();
+    }
+    
   } else {
     prof_pic = 'images/default-profile.png';
+    $("#img-right-nav").hide();
   }
   var age;
   age = candidate.dob;
@@ -171,4 +191,23 @@ function _arrayBufferToBase64( buffer ) {
     
     // btoa is not needed when original string sent to the DB was already base64
     //return window.btoa( binary );
+}
+
+var img_index = 0;
+function cycle_pic(shift) {
+  var final_index = img_index + shift;
+  if (final_index >= 0 && final_index < candidate.pictures.length) {
+    $('#active-profile-img').attr('src', candidate.pictures[final_index]);
+    if (final_index == 0) {
+      $('#img-left-nav').hide();
+    } else {
+      $('#img-left-nav').show();
+    }
+    if (final_index == candidate.pictures.length-1) {
+      $('#img-right-nav').hide();
+    } else {
+      $('#img-right-nav').show();
+    }
+    img_index = final_index;
+  }
 }

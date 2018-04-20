@@ -5,8 +5,8 @@
 body {
   display: flex;
   flex-direction: column;
-  min-height: 400px;
-  min-width: 780px;
+  min-height: 600px;
+  min-width: 930px;
   height: 100%;
   width: 100%;
 }
@@ -141,8 +141,8 @@ body {
 #info-panel {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  min-width: 300px;
+  width: 400px;
+  min-width: 400px;
   padding: 15px;
 }
 
@@ -151,14 +151,63 @@ body {
 }
 
 #active_pic{
-  margin-bottom: 15px ;
+  position: relative;
+  margin: 0 auto 15px auto;
   width: 270px;
   height: 270px;
+  min-height: 150px;
+  max-height: 270px;
   border-radius: 2%;
   background-size: cover;
   background-position: 50% 50%;
   border: 1px solid #bbb;
 }
+
+#active-profile-img-overlay {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.img-nav {
+  display: none;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 50px;
+  background-color: #111;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  line-height: 268px;
+
+  opacity: 0;
+  transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+}
+
+#img-left-nav {
+  left: 0px;
+}
+
+#img-right-nav {
+  right: 0px;
+}
+
+#active-profile-img-overlay:hover > .img-nav {
+  opacity: 0.6;
+}
+
+.img-nav:hover {
+  background-color: #000;
+}
+
+
 
 #active_name {
   display: inline-block;
@@ -167,6 +216,12 @@ body {
 
 #active_age {
   display: inline-block;
+}
+
+#active_about {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  margin-top: 5px;
 }
 
 #active_events {
@@ -187,6 +242,8 @@ body {
 
 .remove_friend {
   height: 31px;
+  min-height: 31px;
+  max-height: 31px;
   margin: 15px auto;
   padding: 5px;
   cursor: pointer;
