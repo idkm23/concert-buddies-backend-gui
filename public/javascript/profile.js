@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
       $.post("/api/profile/about", {about: about})
         .done(function(data) {
           console.log(data);
+          $("#desc-saved").stop(true, true);
+          $("#desc-saved").show();
+          $("#desc-saved").fadeOut(3000);
         });
     });
     
@@ -131,6 +134,9 @@ function uploadFile(fileName) {
                 success: function(res) {
                     console.log("upload response: ");
                     console.dir(res);
+                    $("#pic-saved").stop(true, true);
+                    $("#pic-saved").show();
+                    $("#pic-saved").fadeOut(3000);
                     addImageCard(imgString, imageContainer);
                 }
             });

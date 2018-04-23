@@ -40,6 +40,10 @@ div.profile-desc {
     width: 25%;
 }
 
+.saved {
+    margin-left: 20px;
+}
+
 button {
     float: right;
 }
