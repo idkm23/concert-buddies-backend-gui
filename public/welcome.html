@@ -39,19 +39,19 @@
             <hr/>
             <form action="/api/user/signup" method="post"> Name
                 <br/>
-                <input type="text" name="firstname" placeholder="First">
-                <input type="text" name="lastname" placeholder="Last">
+                <input type="text" name="firstname" placeholder="First" required>
+                <input type="text" name="lastname" placeholder="Last" required>
                 <br/> Email
                 <br/>
-                <input type="email" name="email">
+                <input type="email" name="email" required>
                 <br/> Password
                 <br/>
-                <input type="password" name="password">
+                <input type="password" name="password" minlength="4" maxlength="20" required>
                 <br/> Birthday
                 <br/>
-                <input type="date" name="dob">
+                <input type="date" name="dob" min="1900-01-01" max="2005-12-31" required>
                 <br/>
-                <input type="radio" name="gender" value="male"> Male
+                <input type="radio" name="gender" value="male" checked> Male
                 <input type="radio" name="gender" value="female"> Female
                 <br/>
                 <input type="submit" class="button" name="create-account-button" value="Create Account">

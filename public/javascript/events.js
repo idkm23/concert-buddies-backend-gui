@@ -49,7 +49,7 @@ function getSearchResults() {
     searchTerms = searchTerms.replace(/ /g, '+');
     var searchUrl = "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=" + 
         searchTerms + 
-        "&size=30&apikey=etiKzCoqnYu3LmsKbArqF6uxdAJGaENS";
+        "&size=60&apikey=etiKzCoqnYu3LmsKbArqF6uxdAJGaENS";
     
     $("#results-table").tabulator("setData", searchUrl);
 }

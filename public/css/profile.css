@@ -42,6 +42,8 @@ div.profile-desc {
 
 .saved {
     margin-left: 20px;
+    color: green;
+    font-weight: bold;
 }
 
 button {
