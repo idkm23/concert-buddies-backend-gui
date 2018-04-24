@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var env = require('dotenv').load()
 var bodyParser = require('body-parser');
+var flash = require('connect-flash');
 var passport = require('passport');
 var session = require('express-session');
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -38,6 +39,7 @@ app.use(session({
   store: app.session_store,
   resave: false
 })); // session secret
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 

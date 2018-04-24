@@ -30,6 +30,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.18.2",
+    "connect-flash": "^0.1.1",
     "connect-pg": "^1.1.5",
     "connect-redis": "^3.3.3",
     "connect-session-sequelize": "^5.2.1",

@@ -8,12 +8,21 @@
     <link rel="stylesheet" href="css/main.css"> 
     <link rel="stylesheet" href="css/welcome.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <script>
+        window.onload = function () { 
+            document.getElementById("error-msg").innerHTML = local_data;
+        };
+    </script>
 </head>
 
 <body>
     <div class="nav-bar"> 
         <a href="#"><h1 class="concert-buddies">ConcertBuddies</h1></a>
         <form class="log-in-form" action="/api/user/signin" method="post">
+            <div class="error-box">
+                <label for="error-msg">&nbsp;</label>
+                <p id="error-msg"></p>
+            </div>
             <div class="email-box">
                 <label for="email">Email</label>
                 <input name="email" type="email">

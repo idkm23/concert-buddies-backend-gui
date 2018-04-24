@@ -24,7 +24,8 @@ module.exports = function(app, passport) {
    **/
   app.post('/api/user/signin', passport.authenticate('local-signin',  {
     successRedirect: '/events',
-    failureRedirect: '/'
+    failureRedirect: '/',
+    failureFlash: true
   }));
 
   /* SIGN UP via POST

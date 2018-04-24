@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
     if (req.isAuthenticated()) {
       res.redirect('/events');
     } else {
-      res.render('welcome', {});
+      res.render('welcome', {message: req.flash('error')});
     }
   });
 };
